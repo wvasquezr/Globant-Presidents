@@ -1,6 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿/***********************************************************************
+ABIE Development team
+***********************************************************************/
+
 using System.Web.Http;
 
 namespace Presidents.WebService
@@ -10,7 +11,7 @@ namespace Presidents.WebService
         public static void Register(HttpConfiguration config)
         {
             // Web API configuration and services
-
+            config.EnableCors();
             // Web API routes
             config.MapHttpAttributeRoutes();
 

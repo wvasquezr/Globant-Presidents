@@ -3,6 +3,7 @@ ABIE Development team
 ***********************************************************************/
 
 using CsvHelper;
+using Presidents.Common;
 using Presidents.Entities;
 using System;
 using System.Collections.Generic;
@@ -15,8 +16,9 @@ namespace Presidents.DataLayer
 {
     public class FileControl
     {
-        public List<PresidentDto> GetPresidentsInfo()
+        public List<PresidentDto> GetPresidentsInfo(PresidentFieldEnum sortByEnum, bool isDescending)
         {
+            // Setup the CSV reader
             CsvHelper.Configuration.Configuration configuration = new CsvHelper.Configuration.Configuration
             {
                 AllowComments = true,
@@ -26,10 +28,23 @@ namespace Presidents.DataLayer
                 CultureInfo = CultureInfo.InvariantCulture
             };
             configuration.RegisterClassMap<PresidentMapper>();
-            string content = GetCsv("https://globantfiles.blob.core.windows.net/files/PresidentList.csv?st=2018-10-04T22%3A57%3A32Z&se=2019-10-05T22%3A57%3A00Z&sp=rl&sv=2018-03-28&sr=b&sig=AR7ipO7sJeb5aW5tBVimHoLK0tn%2FIa5I8Fh2KUVNIJo%3D");
+            // Read the CSV content
+            string content = GetCsv(Parameter.PresidentsCsv);
             TextReader textReader = new StringReader(content);
             CsvReader csvReader = new CsvReader(textReader, configuration);
             IEnumerable<PresidentDto> records = csvReader.GetRecords<PresidentDto>();
+            // Order the list
+            if (sortByEnum != PresidentFieldEnum.None)
+            {
+                var propertyInfo = typeof(PresidentDto).GetProperty(sortByEnum.ToString());
+                if (propertyInfo != null)
+                {
+                    records = isDescending
+                        ? records.OrderByDescending(item => propertyInfo.GetValue(item, null))
+                        : records.OrderBy(item => propertyInfo.GetValue(item, null));
+                }
+            }
+
             return records.ToList();
         }
 

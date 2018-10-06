@@ -1,23 +1,30 @@
 ﻿/***********************************************************************
 ABIE Development team
 ***********************************************************************/
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
+
 using Presidents.BusinessLayer;
+using Presidents.Common;
 using Presidents.Entities;
+using System.Collections.Generic;
+using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace Presidents.WebService.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class PresidentController : ApiController
     {
-        public List<PresidentDto> Get()
+        /// <summary>
+        /// Gets a list of the presidents of US.
+        /// </summary>
+        /// <param name="sortBy">The sort by.</param>
+        /// <param name="isDescending">if set to <c>true</c> [is descending].</param>
+        /// <returns>List of <type>PresidentDto</type></returns>
+        [HttpGet]
+        public List<PresidentDto> Get(PresidentFieldEnum sortBy = PresidentFieldEnum.None, bool isDescending = false)
         {
             PresidentControl presidentControl = new PresidentControl();
-            return presidentControl.GetPresidentsInfo();
+            return presidentControl.GetPresidentsInfo(sortBy, isDescending);
         }
     }
 }
