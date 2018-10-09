@@ -2,7 +2,6 @@
 ABIE Development team
 ***********************************************************************/
 
-using Presidents.BusinessLayer;
 using Presidents.Common;
 using Presidents.Entities;
 using System.Collections.Generic;
@@ -23,8 +22,7 @@ namespace Presidents.WebService.Controllers
         [HttpGet]
         public List<PresidentDto> Get(PresidentFieldEnum sortBy = PresidentFieldEnum.None, bool isDescending = false)
         {
-            PresidentControl presidentControl = new PresidentControl();
-            return presidentControl.GetPresidentsInfo(sortBy, isDescending);
+            return UnityImplementation.PresidentControl.GetPresidentsInfo(sortBy, isDescending);
         }
     }
 }

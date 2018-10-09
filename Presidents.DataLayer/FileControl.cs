@@ -14,7 +14,7 @@ using System.Net;
 
 namespace Presidents.DataLayer
 {
-    public class FileControl
+    public class FileControl : IAction
     {
         public List<PresidentDto> GetPresidentsInfo(PresidentFieldEnum sortByEnum, bool isDescending)
         {
