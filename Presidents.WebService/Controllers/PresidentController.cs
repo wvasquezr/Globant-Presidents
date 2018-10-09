@@ -22,7 +22,7 @@ namespace Presidents.WebService.Controllers
         [HttpGet]
         public List<PresidentDto> Get(PresidentFieldEnum sortBy = PresidentFieldEnum.None, bool isDescending = false)
         {
-            return UnityImplementation.PresidentControl.GetPresidentsInfo(sortBy, isDescending);
+            return Factory.PresidentControl.GetPresidentsInfo(sortBy, isDescending);
         }
     }
 }

@@ -8,11 +8,11 @@ using Unity;
 
 namespace Presidents.BusinessLayer
 {
-    public class UnityImplementation
+    public class Factory
     {
         private static readonly UnityContainer UnityContainer = new UnityContainer();
 
-        public UnityImplementation()
+        public Factory()
         {
             UnityContainer.RegisterType<IAction, FileControl>();
         }

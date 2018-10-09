@@ -85,7 +85,7 @@
   <ItemGroup>
     <Compile Include="PresidentControl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UnityImplementation.cs" />
+    <Compile Include="Factory.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Presidents.Common\Presidents.Common.csproj">

@@ -19,7 +19,7 @@ namespace Presidents.BusinessLayer
 
         public List<PresidentDto> GetPresidentsInfo(PresidentFieldEnum sortBy, bool isDescending = false)
         {
-            return UnityImplementation.FileControl.GetPresidentsInfo(sortBy, isDescending);
+            return Factory.FileControl.GetPresidentsInfo(sortBy, isDescending);
         }
     }
 }
